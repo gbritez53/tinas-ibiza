@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import keyGold from '../../assets/brand/key-gold.png';
+import Icon from '../../shared/ui/Icon.astro';
+import { site } from '../../shared/config/site';
+import { getTranslations } from '../../shared/i18n';
+
+const t = getTranslations(Astro.currentLocale).cta;
+
+const whatsappHref = `${site.whatsapp}?text=${encodeURIComponent(t.quoteMessage)}`;
+const emailHref = `mailto:${site.email}?subject=${encodeURIComponent(t.quoteSubject)}`;
+---
+
+<section class="border-t border-line bg-cream-200 text-green-900">
+  <div class="mx-auto flex max-w-7xl flex-col items-center gap-8 px-8 py-28 text-center">
+    <Image src={keyGold} alt="" class="h-[110px] w-auto" />
+    <h2 class="font-classic text-[clamp(40px,5vw,68px)] leading-[1.05]">
+      {t.titleStart} <span class="font-display text-sage-600 italic">{t.titleAccent}</span>
+    </h2>
+    <p class="max-w-xl text-[17px] leading-[1.7] text-ink-muted">{t.body}</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener"
+        class="rounded-full bg-green-900 px-7.5 py-4.5 text-sm font-medium text-cream-50 transition-opacity hover:opacity-90"
+      >
+        {t.whatsapp}
+      </a>
+      <a
+        href={emailHref}
+        class="flex items-center gap-2.5 rounded-full border border-green-900 px-7.5 py-4.5 text-sm font-medium text-green-900 transition-colors hover:bg-green-900 hover:text-cream-50"
+      >
+        <Icon name="mail" class="size-4 shrink-0" />
+        {site.email}
+      </a>
+    </div>
+  </div>
+</section>
