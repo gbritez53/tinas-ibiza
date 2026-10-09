@@ -1,0 +1,46 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import poolBefore from '../../assets/before-after/pool-before.jpg';
+import poolAfter from '../../assets/before-after/pool-after.jpg';
+import { BeforeAfterSlider, type SliderImage } from './BeforeAfterSlider';
+import { getTranslations } from '../../shared/i18n';
+
+const t = getTranslations(Astro.currentLocale).work;
+const sizes = '(min-width: 1024px) 560px, 100vw';
+
+async function toSliderImage(src: ImageMetadata, alt: string): Promise<SliderImage> {
+  const image = await getImage({ src, widths: [560, 1086], format: 'webp' });
+  return {
+    src: image.src,
+    srcSet: image.srcSet.attribute,
+    alt,
+    width: src.width,
+    height: src.height,
+  };
+}
+
+const before = await toSliderImage(poolBefore, t.slider.beforeAlt);
+const after = await toSliderImage(poolAfter, t.slider.afterAlt);
+const labels = {
+  label: t.slider.label,
+  before: t.slider.before,
+  after: t.slider.after,
+  valueText: t.slider.valueText,
+};
+---
+
+<section id="work" class="mx-auto flex max-w-7xl scroll-mt-4 flex-wrap items-center gap-16 px-8 py-30">
+  <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-6">
+    <h2
+      class="font-display text-[clamp(40px,4.6vw,64px)] leading-none font-light tracking-[0.04em] uppercase"
+    >
+      {t.titleBefore} <span class="text-gold-300">/</span>
+      {t.titleAfter}
+    </h2>
+    <p class="max-w-md text-base leading-[1.7] text-mist">{t.body}</p>
+  </div>
+  <div class="w-full min-w-0 flex-[1_1_420px] lg:max-w-[560px]">
+    <BeforeAfterSlider client:visible before={before} after={after} sizes={sizes} labels={labels} />
+  </div>
+</section>
