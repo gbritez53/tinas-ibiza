@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import type { Service } from './services';
+
+interface Props {
+  service: Service;
+  title: string;
+}
+
+const { service, title } = Astro.props;
+---
+
+<article
+  class="relative isolate flex h-[400px] flex-col items-center justify-center overflow-hidden bg-green-900 p-6 text-center text-cream-200"
+>
+  {
+    service.image && (
+      <>
+        <Image
+          src={service.image}
+          alt=""
+          widths={[400, 800]}
+          sizes="(min-width: 1280px) 400px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          class="absolute inset-0 -z-20 size-full object-cover"
+        />
+        <div class="absolute inset-0 -z-10 bg-[rgb(9_30_30/0.55)]" />
+      </>
+    )
+  }
+  <div class="flex flex-col items-center gap-3.5">
+    <span class="h-12 w-px bg-cream-200" aria-hidden="true"></span>
+    <span class="text-gold-300" aria-hidden="true">✳</span>
+    <h3
+      class="font-display text-[26px] leading-[1.15] font-normal tracking-[0.06em] whitespace-pre-line uppercase"
+    >
+      {title}
+    </h3>
+    <span class="h-12 w-px bg-cream-200" aria-hidden="true"></span>
+  </div>
+</article>
