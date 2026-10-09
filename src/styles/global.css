@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — sampled from TINAS official pieces (see knowledge/brand.md) */
+  --color-green-900: #0e3636;
+  --color-gold-300: #c9ba78;
+  --color-gold-600: #8a7a35;
+  --color-gold-700: #7a6a2e;
+  --color-sage-600: #526e57;
+  --color-cream-50: #fbf8f3;
+  --color-cream-100: #f3efe9;
+  --color-cream-200: #f0ebe2;
+  --color-line: #ddd5c6;
+  --color-line-dark: #2e5252;
+  --color-ink-soft: #2c4646;
+  --color-ink-muted: #3a4f4f;
+  --color-mist: #c8d3d0;
+  --color-mist-muted: #a9bdbd;
+
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-editorial: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-classic: "Marcellus", ui-serif, Georgia, serif;
+  --font-sans: "Montserrat Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee var(--marquee-duration, 70s) linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-green-900 font-sans text-cream-200 antialiased;
+  }
+}

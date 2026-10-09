@@ -1,0 +1,74 @@
+---
+import '@fontsource/cormorant-garamond/latin-300.css';
+import '@fontsource/cormorant-garamond/latin-300-italic.css';
+import '@fontsource/cormorant-garamond/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-400-italic.css';
+import '@fontsource/instrument-serif/latin-400.css';
+import '@fontsource/instrument-serif/latin-400-italic.css';
+import '@fontsource/marcellus/latin-400.css';
+import '@fontsource-variable/montserrat/wght.css';
+import '../styles/global.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { site } from '../shared/config/site';
+import { defaultLocale, getTranslations, localeTags, locales, toLocale } from '../shared/i18n';
+
+const locale = toLocale(Astro.currentLocale);
+const { title, description } = getTranslations(locale).meta;
+
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  name: site.name,
+  description,
+  email: site.email,
+  telephone: site.phones[0].label,
+  areaServed: 'Ibiza',
+  availableLanguage: ['es', 'en'],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Ibiza',
+    postalCode: site.postalCode,
+    addressRegion: 'Balearic Islands',
+    addressCountry: 'ES',
+  },
+  sameAs: [site.instagram.url, site.facebook],
+};
+---
+
+<!doctype html>
+<html lang={localeTags[locale].lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0e3636" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    {
+      locales.map((alternate) => (
+        <link
+          rel="alternate"
+          hreflang={localeTags[alternate].lang}
+          href={getRelativeLocaleUrl(alternate)}
+        />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={getRelativeLocaleUrl(defaultLocale)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={localeTags[locale].og} />
+    {
+      locales
+        .filter((alternate) => alternate !== locale)
+        .map((alternate) => (
+          <meta property="og:locale:alternate" content={localeTags[alternate].og} />
+        ))
+    }
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
