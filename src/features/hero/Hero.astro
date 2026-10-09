@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import ibizaEntrance from '../../assets/hero/ibiza-entrance.jpg';
+import monogramCream from '../../assets/brand/monogram-cream.png';
+import LanguageSwitcher from '../../shared/ui/LanguageSwitcher.astro';
+import { navigation } from '../../shared/config/site';
+import { getTranslations } from '../../shared/i18n';
+
+const t = getTranslations(Astro.currentLocale);
+---
+
+<section class="relative isolate flex min-h-[860px] flex-col overflow-hidden">
+  <Image
+    src={ibizaEntrance}
+    alt=""
+    widths={[768, 1080, 1440, 1672]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 -z-20 size-full object-cover"
+  />
+  <div class="absolute inset-0 -z-10 bg-[rgb(9_34_34/0.62)]"></div>
+
+  <header
+    class="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 px-8 py-7 text-xs font-medium tracking-[0.22em] uppercase"
+  >
+    <nav aria-label={t.nav.label} class="flex flex-wrap gap-8">
+      {
+        navigation.map((item) => (
+          <a href={item.href} class="text-cream-200 transition-colors hover:text-gold-300">
+            {t.nav[item.key]}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="flex flex-wrap items-center gap-6">
+      <LanguageSwitcher />
+      <a
+        href="#contact"
+        class="border border-gold-300 px-6 py-3.5 text-cream-200 transition-colors hover:bg-gold-300 hover:text-green-900"
+      >
+        {t.nav.contact}
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-1 flex-col items-center justify-center gap-5 px-8 pt-10 pb-24 text-center">
+    <Image src={monogramCream} alt="" class="h-[110px] w-auto" />
+    <h1
+      class="font-display text-[clamp(72px,10vw,150px)] leading-[0.9] font-normal tracking-[0.14em]"
+    >
+      TINAS
+    </h1>
+    <p class="text-sm tracking-[0.34em] uppercase">
+      {t.hero.tagline} · <span class="text-gold-300">Ibiza</span>
+    </p>
+    <div class="mt-4 h-18 w-px bg-cream-200" aria-hidden="true"></div>
+    <p
+      class="max-w-3xl font-display text-[clamp(26px,3vw,38px)] leading-tight font-light italic"
+    >
+      {t.hero.lead}
+    </p>
+  </div>
+</section>
