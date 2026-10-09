@@ -1,0 +1,29 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getTranslations, localeNames, localeTags, locales, toLocale } from '../i18n';
+
+const current = toLocale(Astro.currentLocale);
+const t = getTranslations(current).nav;
+---
+
+<nav aria-label={t.language} class="flex items-center gap-2">
+  {
+    locales.map((locale, index) => (
+      <>
+        {index > 0 && <span aria-hidden="true">/</span>}
+        <a
+          href={getRelativeLocaleUrl(locale)}
+          hreflang={localeTags[locale].lang}
+          lang={localeTags[locale].lang}
+          aria-current={locale === current ? 'page' : undefined}
+          class:list={[
+            'transition-colors hover:text-gold-300',
+            locale === current ? 'text-gold-300' : 'text-cream-200',
+          ]}
+        >
+          {localeNames[locale]}
+        </a>
+      </>
+    ))
+  }
+</nav>
