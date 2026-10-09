@@ -1,0 +1,39 @@
+---
+import MarqueeRow from './MarqueeRow.astro';
+import { brandPosts, workPosts } from './posts';
+import { site } from '../../shared/config/site';
+import { getTranslations } from '../../shared/i18n';
+
+const t = getTranslations(Astro.currentLocale).instagram;
+---
+
+<section aria-labelledby="instagram-title" class="flex flex-col gap-10 overflow-hidden pt-10 pb-30">
+  <div class="flex flex-col gap-3 px-8 text-center">
+    <p class="text-xs tracking-[0.3em] text-gold-300 uppercase">{site.instagram.handle}</p>
+    <h2
+      id="instagram-title"
+      class="font-display text-[clamp(36px,4vw,56px)] font-light italic"
+    >
+      {t.title}
+    </h2>
+  </div>
+
+  <div
+    class="flex flex-col gap-5 motion-reduce:overflow-x-auto"
+    style="--marquee-duration: 70s"
+  >
+    <MarqueeRow posts={brandPosts} />
+    <MarqueeRow posts={workPosts} reverse />
+  </div>
+
+  <div class="flex justify-center">
+    <a
+      href={site.instagram.url}
+      target="_blank"
+      rel="noopener"
+      class="border border-gold-300 px-7 py-4 text-xs tracking-[0.22em] text-cream-200 uppercase transition-colors hover:bg-gold-300 hover:text-green-900"
+    >
+      {t.follow}
+    </a>
+  </div>
+</section>

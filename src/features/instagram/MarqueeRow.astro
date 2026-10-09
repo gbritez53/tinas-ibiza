@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { InstagramPost } from './posts';
+import { toLocale } from '../../shared/i18n';
+
+interface Props {
+  posts: InstagramPost[];
+  reverse?: boolean;
+}
+
+const { posts, reverse = false } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+
+// The list renders twice so translateX(-50%) loops seamlessly; the copy is hidden from assistive tech.
+const copies = [false, true] as const;
+---
+
+<div
+  class:list={[
+    'flex w-max animate-marquee gap-5 motion-reduce:animate-none',
+    reverse && '[animation-direction:reverse]',
+  ]}
+>
+  {
+    copies.map((isCopy) => (
+      <ul class="flex gap-5" aria-hidden={isCopy ? 'true' : undefined}>
+        {posts.map((post) => (
+          <li class="flex-none overflow-hidden rounded-[20px]">
+            <Image
+              src={post.image}
+              alt={isCopy ? '' : post.alt[locale]}
+              widths={[250, 500]}
+              sizes="250px"
+              class="h-[444px] w-[250px] object-cover"
+            />
+          </li>
+        ))}
+      </ul>
+    ))
+  }
+</div>
