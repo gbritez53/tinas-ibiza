@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import founders from '../../assets/about/founders.jpg';
+import keyGold from '../../assets/brand/key-gold.png';
+import { getTranslations } from '../../shared/i18n';
+
+const t = getTranslations(Astro.currentLocale).about;
+---
+
+<section id="about" class="scroll-mt-4 bg-cream-200 text-green-900">
+  <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-16 px-8 py-30">
+    <figure
+      class="relative m-0 min-w-0 flex-[1_1_420px] bg-cream-50 p-4.5 pb-16 shadow-[0_20px_50px_rgb(14_54_54/0.18)]"
+    >
+      <Image
+        src={founders}
+        alt={t.foundersAlt}
+        widths={[480, 960]}
+        sizes="(min-width: 1024px) 560px, 100vw"
+        class="h-[420px] w-full object-cover"
+      />
+      <figcaption class="absolute bottom-4.5 left-6 font-display text-2xl text-gold-700 italic">
+        {t.foundersCaption}
+      </figcaption>
+    </figure>
+    <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-6">
+      <h2 class="font-display text-[clamp(40px,4.6vw,60px)] leading-[1.05] font-normal">
+        {t.titleStart} <em class="text-gold-700">{t.titleAccent}</em>
+      </h2>
+      <p class="text-[17px] leading-[1.8] text-ink-soft">{t.body}</p>
+      <Image src={keyGold} alt="" class="h-[90px] w-auto self-start" />
+    </div>
+  </div>
+</section>
