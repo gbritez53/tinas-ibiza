@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import poolAerial from '../../assets/care/pool-aerial.jpg';
+import { getTranslations } from '../../shared/i18n';
+
+const t = getTranslations(Astro.currentLocale).care;
+---
+
+<section class="mx-auto flex max-w-7xl flex-wrap items-center gap-16 px-8 py-30">
+  <div class="flex min-w-0 flex-[1_1_460px] flex-col gap-6">
+    <p class="text-xs tracking-[0.3em] text-gold-300 uppercase">
+      <span aria-hidden="true">✳ </span>{t.eyebrow}
+    </p>
+    <h2
+      class="font-display text-[clamp(44px,5vw,70px)] leading-[1.02] font-light tracking-[0.03em] uppercase"
+    >
+      {t.titleStart} <span class="text-gold-300 normal-case italic">{t.titleAccent}</span>
+    </h2>
+    <p class="text-[17px] leading-[1.8] text-mist">{t.body}</p>
+    <dl class="flex flex-wrap gap-10 pt-3">
+      {
+        t.seasons.map((season) => (
+          <div class="flex flex-col gap-1.5">
+            <dt class="font-display text-[34px] text-gold-300">{season.name}</dt>
+            <dd class="text-[13px] text-mist">{season.detail}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+  <Image
+    src={poolAerial}
+    alt={t.imageAlt}
+    widths={[600, 1215]}
+    sizes="(min-width: 1024px) 600px, 100vw"
+    class="h-[480px] w-full min-w-0 flex-[1_1_420px] object-cover"
+  />
+</section>
