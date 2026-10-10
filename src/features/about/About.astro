@@ -10,6 +10,7 @@ const t = getTranslations(Astro.currentLocale).about;
 <section id="about" class="scroll-mt-4 bg-cream-200 text-green-900">
   <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-16 px-8 py-30">
     <figure
+      data-reveal="left"
       class="relative m-0 min-w-0 flex-[1_1_420px] bg-cream-50 p-4.5 pb-16 shadow-[0_20px_50px_rgb(14_54_54/0.18)]"
     >
       <Image
@@ -24,11 +25,21 @@ const t = getTranslations(Astro.currentLocale).about;
       </figcaption>
     </figure>
     <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-6">
-      <h2 class="font-display text-[clamp(40px,4.6vw,60px)] leading-[1.05] font-normal">
+      <Image
+        src={keyGold}
+        alt=""
+        data-reveal="fade"
+        class="h-[90px] w-auto self-center [--reveal-delay:150ms]"
+      />
+      <h2
+        data-reveal="right"
+        class="font-display text-[clamp(40px,4.6vw,60px)] leading-[1.05] font-normal [--reveal-delay:250ms]"
+      >
         {t.titleStart} <em class="text-gold-700">{t.titleAccent}</em>
       </h2>
-      <p class="text-[17px] leading-[1.8] text-ink-soft">{t.body}</p>
-      <Image src={keyGold} alt="" class="h-[90px] w-auto self-start" />
+      <p data-reveal="right" class="text-[17px] leading-[1.8] text-ink-soft [--reveal-delay:400ms]">
+        {t.body}
+      </p>
     </div>
   </div>
 </section>

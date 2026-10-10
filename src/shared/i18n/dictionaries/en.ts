@@ -85,6 +85,7 @@ export const en = {
     location: 'Ibiza, Balearic Islands',
     languages: 'Spanish / English',
     whatsapp: 'Message us on WhatsApp',
+    whatsappMessage: 'Hello TINAS, I would like more information about your services in Ibiza.',
     tagline: 'Discreet. Reliable. Effortless living, all year round.',
   },
 };

@@ -8,10 +8,13 @@ const t = getTranslations(Astro.currentLocale).manifesto;
 
 <section class="bg-cream-100 text-green-900">
   <div class="mx-auto flex max-w-4xl flex-col items-center gap-7 px-8 py-32 text-center">
-    <Image src={keyGold} alt="" class="h-[120px] w-auto" />
-    <h2 class="font-editorial text-[clamp(44px,5.5vw,80px)] leading-none">
+    <Image src={keyGold} alt="" data-reveal="fade" class="h-[120px] w-auto" />
+    <h2
+      data-reveal
+      class="font-editorial text-[clamp(44px,5.5vw,80px)] leading-none [--reveal-delay:150ms]"
+    >
       {t.titleStart} <em class="text-gold-600">{t.titleAccent}</em>
     </h2>
-    <p class="text-lg leading-[1.8] text-ink-soft">{t.body}</p>
+    <p data-reveal class="text-lg leading-[1.8] text-ink-soft [--reveal-delay:300ms]">{t.body}</p>
   </div>
 </section>

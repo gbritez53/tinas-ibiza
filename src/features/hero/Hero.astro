@@ -9,21 +9,12 @@ import { getTranslations } from '../../shared/i18n';
 const t = getTranslations(Astro.currentLocale);
 ---
 
-<section class="relative isolate flex min-h-[860px] flex-col overflow-hidden">
-  <Image
-    src={ibizaEntrance}
-    alt=""
-    widths={[768, 1080, 1440, 1672]}
-    sizes="100vw"
-    loading="eager"
-    fetchpriority="high"
-    class="absolute inset-0 -z-20 size-full object-cover"
-  />
-  <div class="absolute inset-0 -z-10 bg-[rgb(9_34_34/0.62)]"></div>
-
-  <header
-    class="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 px-8 py-7 text-xs font-medium tracking-[0.22em] uppercase"
-  >
+<!-- Lives outside the hero: the section is `isolate`, which would trap z-50 inside its stacking context. -->
+<header
+  data-site-header
+  class="fixed inset-x-0 top-0 z-50 py-7 text-xs font-medium tracking-[0.22em] uppercase transition-[background-color,box-shadow,padding] duration-300 data-scrolled:bg-green-900/95 data-scrolled:py-4 data-scrolled:shadow-[0_8px_30px_rgb(0_0_0/0.18)] data-scrolled:backdrop-blur-sm"
+>
+  <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-8">
     <nav aria-label={t.nav.label} class="flex flex-wrap gap-8">
       {
         navigation.map((item) => (
@@ -42,23 +33,54 @@ const t = getTranslations(Astro.currentLocale);
         {t.nav.contact}
       </a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <div class="flex flex-1 flex-col items-center justify-center gap-5 px-8 pt-10 pb-24 text-center">
-    <Image src={monogramCream} alt="" class="h-[110px] w-auto" />
+<section class="relative isolate flex min-h-[860px] flex-col overflow-hidden">
+  <Image
+    src={ibizaEntrance}
+    alt=""
+    widths={[768, 1080, 1440, 1672]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 -z-20 size-full object-cover"
+  />
+  <div class="absolute inset-0 -z-10 bg-[rgb(9_34_34/0.62)]"></div>
+
+  <!-- pt-36 makes room for the fixed header, which no longer takes space in the flow. -->
+  <div class="flex flex-1 flex-col items-center justify-center gap-5 px-8 pt-36 pb-24 text-center">
+    <Image src={monogramCream} alt="" data-reveal="fade" class="h-[110px] w-auto" />
     <h1
-      class="font-display text-[clamp(72px,10vw,150px)] leading-[0.9] font-normal tracking-[0.14em]"
+      data-reveal
+      class="font-display text-[clamp(72px,10vw,150px)] leading-[0.9] font-normal tracking-[0.14em] [--reveal-delay:150ms]"
     >
       TINAS
     </h1>
-    <p class="text-sm tracking-[0.34em] uppercase">
+    <p data-reveal class="text-sm tracking-[0.34em] uppercase [--reveal-delay:300ms]">
       {t.hero.tagline} · <span class="text-gold-300">Ibiza</span>
     </p>
-    <div class="mt-4 h-18 w-px bg-cream-200" aria-hidden="true"></div>
+    <div
+      data-reveal="line"
+      class="mt-4 h-18 w-px bg-cream-200 [--reveal-delay:450ms]"
+      aria-hidden="true"
+    >
+    </div>
     <p
-      class="max-w-3xl font-display text-[clamp(26px,3vw,38px)] leading-tight font-light italic"
+      data-reveal
+      class="max-w-3xl font-display text-[clamp(26px,3vw,38px)] leading-tight font-light italic [--reveal-delay:650ms]"
     >
       {t.hero.lead}
     </p>
   </div>
 </section>
+
+<script>
+  // Transparent over the hero, solid once the page scrolls.
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  if (header) {
+    const update = () => header.toggleAttribute('data-scrolled', window.scrollY > 40);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>

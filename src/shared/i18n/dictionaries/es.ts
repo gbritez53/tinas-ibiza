@@ -86,6 +86,7 @@ export const es: Dictionary = {
     location: 'Ibiza, Islas Baleares',
     languages: 'Español / Inglés',
     whatsapp: 'Escríbanos por WhatsApp',
+    whatsappMessage: 'Hola TINAS, me gustaría recibir más información sobre sus servicios en Ibiza.',
     tagline: 'Discreción. Confianza. Tranquilidad durante todo el año.',
   },
 };

@@ -40,6 +40,8 @@ const localBusiness = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Runs before first paint so reveal elements never flash visible-then-hidden. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -70,5 +72,24 @@ const localBusiness = {
   </head>
   <body>
     <slot />
+    <script>
+      // Scroll reveal: see the data-reveal rules in global.css.
+      const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+        );
+        targets.forEach((target) => observer.observe(target));
+      } else {
+        targets.forEach((target) => target.classList.add('is-visible'));
+      }
+    </script>
   </body>
 </html>

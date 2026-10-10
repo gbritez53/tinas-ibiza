@@ -8,19 +8,24 @@ const t = getTranslations(Astro.currentLocale).care;
 
 <section class="mx-auto flex max-w-7xl flex-wrap items-center gap-16 px-8 py-30">
   <div class="flex min-w-0 flex-[1_1_460px] flex-col gap-6">
-    <p class="text-xs tracking-[0.3em] text-gold-300 uppercase">
+    <p data-reveal="fade" class="text-xs tracking-[0.3em] text-gold-300 uppercase">
       <span aria-hidden="true">✳ </span>{t.eyebrow}
     </p>
     <h2
-      class="font-display text-[clamp(44px,5vw,70px)] leading-[1.02] font-light tracking-[0.03em] uppercase"
+      data-reveal
+      class="font-display text-[clamp(44px,5vw,70px)] leading-[1.02] font-light tracking-[0.03em] uppercase [--reveal-delay:120ms]"
     >
       {t.titleStart} <span class="text-gold-300 normal-case italic">{t.titleAccent}</span>
     </h2>
-    <p class="text-[17px] leading-[1.8] text-mist">{t.body}</p>
+    <p data-reveal class="text-[17px] leading-[1.8] text-mist [--reveal-delay:240ms]">{t.body}</p>
     <dl class="flex flex-wrap gap-10 pt-3">
       {
-        t.seasons.map((season) => (
-          <div class="flex flex-col gap-1.5">
+        t.seasons.map((season, index) => (
+          <div
+            data-reveal
+            class="flex flex-col gap-1.5"
+            style={`--reveal-delay: ${360 + index * 120}ms`}
+          >
             <dt class="font-display text-[34px] text-gold-300">{season.name}</dt>
             <dd class="text-[13px] text-mist">{season.detail}</dd>
           </div>
@@ -28,11 +33,13 @@ const t = getTranslations(Astro.currentLocale).care;
       }
     </dl>
   </div>
-  <Image
-    src={gardenLawnCare}
-    alt={t.imageAlt}
-    widths={[600, 1000, 1400]}
-    sizes="(min-width: 1024px) 600px, 100vw"
-    class="h-[640px] w-full min-w-0 flex-[1_1_420px] object-cover object-[50%_75%]"
-  />
+  <div data-reveal="curtain" class="min-w-0 flex-[1_1_420px]">
+    <Image
+      src={gardenLawnCare}
+      alt={t.imageAlt}
+      widths={[600, 1000, 1400]}
+      sizes="(min-width: 1024px) 600px, 100vw"
+      class="h-[640px] w-full object-cover object-[50%_75%]"
+    />
+  </div>
 </section>

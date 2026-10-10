@@ -14,6 +14,7 @@ const t = getTranslations(current).nav;
         <a
           href={getRelativeLocaleUrl(locale)}
           hreflang={localeTags[locale].lang}
+          data-locale-link
           lang={localeTags[locale].lang}
           aria-current={locale === current ? 'page' : undefined}
           class:list={[
@@ -27,3 +28,20 @@ const t = getTranslations(current).nav;
     ))
   }
 </nav>
+
+<script>
+  // Switching language keeps the reader where they were instead of jumping to the top.
+  const KEY = 'tinas:locale-scroll';
+  try {
+    const saved = sessionStorage.getItem(KEY);
+    if (saved !== null) {
+      sessionStorage.removeItem(KEY);
+      window.scrollTo({ top: Number(saved), behavior: 'instant' });
+    }
+    document.querySelectorAll('[data-locale-link]').forEach((link) =>
+      link.addEventListener('click', () => sessionStorage.setItem(KEY, String(window.scrollY))),
+    );
+  } catch {
+    // Storage unavailable (private mode, blocked cookies): fall back to a normal navigation.
+  }
+</script>

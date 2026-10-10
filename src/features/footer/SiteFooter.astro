@@ -7,19 +7,23 @@ import { getTranslations } from '../../shared/i18n';
 
 const t = getTranslations(Astro.currentLocale).footer;
 const year = new Date().getFullYear();
+const whatsappHref = `${site.whatsapp}?text=${encodeURIComponent(t.whatsappMessage)}`;
 ---
 
 <footer id="contact" class="scroll-mt-4 bg-green-900 px-8 pt-24 pb-10 text-cream-100">
   <div class="mx-auto flex max-w-7xl flex-col gap-16">
     <div class="flex flex-wrap justify-between gap-12">
-      <div class="flex flex-[1_1_360px] flex-col gap-5">
+      <div data-reveal class="flex flex-[1_1_360px] flex-col gap-5">
         <Image src={monogramGold} alt="TINAS" class="h-16 w-auto self-start" />
         <h2 class="font-editorial text-5xl leading-[1.05]">
           {t.titleStart} <em class="text-gold-300">{t.titleAccent}</em>
         </h2>
       </div>
 
-      <address class="flex flex-[1_1_320px] flex-col gap-4.5 text-base not-italic">
+      <address
+        data-reveal
+        class="flex flex-[1_1_320px] flex-col gap-4.5 text-base not-italic [--reveal-delay:150ms]"
+      >
         <p class="flex items-center gap-3.5">
           <Icon name="phone" class="size-5 shrink-0 text-gold-300" />
           <span>
@@ -53,7 +57,7 @@ const year = new Date().getFullYear();
           {t.location} · {t.languages}
         </p>
         <a
-          href={site.whatsapp}
+          href={whatsappHref}
           target="_blank"
           rel="noopener"
           class="mt-2 self-start rounded-full bg-gold-300 px-7.5 py-4.5 text-[13px] font-semibold tracking-[0.14em] text-green-900 uppercase transition-opacity hover:opacity-90"

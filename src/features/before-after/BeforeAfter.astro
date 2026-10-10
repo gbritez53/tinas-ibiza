@@ -33,14 +33,20 @@ const labels = {
 <section id="work" class="mx-auto flex max-w-7xl scroll-mt-4 flex-wrap items-center gap-16 px-8 py-30">
   <div class="flex min-w-0 flex-[1_1_420px] flex-col gap-6">
     <h2
+      data-reveal="left"
       class="font-display text-[clamp(40px,4.6vw,64px)] leading-none font-light tracking-[0.04em] uppercase"
     >
       {t.titleBefore} <span class="text-gold-300">/</span>
       {t.titleAfter}
     </h2>
-    <p class="max-w-md text-base leading-[1.7] text-mist">{t.body}</p>
+    <p data-reveal="left" class="max-w-md text-base leading-[1.7] text-mist [--reveal-delay:150ms]">
+      {t.body}
+    </p>
   </div>
-  <div class="w-full min-w-0 flex-[1_1_420px] lg:max-w-[560px]">
-    <BeforeAfterSlider client:visible before={before} after={after} sizes={sizes} labels={labels} />
+  <div data-reveal="curtain" class="w-full min-w-0 flex-[1_1_420px] lg:max-w-[560px]">
+    <!-- astro-island renders as display: contents, so the curtain needs a real box to clip. -->
+    <div>
+      <BeforeAfterSlider client:visible before={before} after={after} sizes={sizes} labels={labels} />
+    </div>
   </div>
 </section>
