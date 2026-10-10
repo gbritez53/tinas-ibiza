@@ -34,7 +34,7 @@ export const es: Dictionary = {
       { name: 'Verano', detail: 'Cuidado diario y atento' },
       { name: 'Cambio de huéspedes', detail: 'Limpieza a fondo entre estancias' },
     ],
-    imageAlt: 'Vista aérea de un miembro del equipo de TINAS limpiando una piscina',
+    imageAlt: 'Miembro del equipo de TINAS cortando el césped de una villa con los montes de Ibiza al fondo',
   },
   services: {
     title: 'Nuestros servicios',

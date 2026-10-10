@@ -33,7 +33,7 @@ export const en = {
       { name: 'Summer', detail: 'Attentive daily care' },
       { name: 'Turnover', detail: 'Deep clean between guests' },
     ],
-    imageAlt: 'Aerial view of a TINAS team member cleaning a pool',
+    imageAlt: 'TINAS team member mowing a villa lawn with the hills of Ibiza in the background',
   },
   services: {
     title: 'Our services',

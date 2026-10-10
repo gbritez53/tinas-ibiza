@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import poolAerial from '../../assets/care/pool-aerial.jpg';
+import gardenLawnCare from '../../assets/care/garden-lawn-care.jpg';
 import { getTranslations } from '../../shared/i18n';
 
 const t = getTranslations(Astro.currentLocale).care;
@@ -29,10 +29,10 @@ const t = getTranslations(Astro.currentLocale).care;
     </dl>
   </div>
   <Image
-    src={poolAerial}
+    src={gardenLawnCare}
     alt={t.imageAlt}
-    widths={[600, 1215]}
+    widths={[600, 1000, 1400]}
     sizes="(min-width: 1024px) 600px, 100vw"
-    class="h-[480px] w-full min-w-0 flex-[1_1_420px] object-cover"
+    class="h-[640px] w-full min-w-0 flex-[1_1_420px] object-cover object-[50%_75%]"
   />
 </section>
