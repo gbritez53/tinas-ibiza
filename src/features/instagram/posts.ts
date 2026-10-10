@@ -14,6 +14,7 @@ import sanding from '../../assets/instagram/DX15JHtiEvg_1.jpg';
 import bedroom from '../../assets/instagram/DV1UvnwCKdL_2.jpg';
 import bathroom from '../../assets/instagram/DV1UvnwCKdL_1.jpg';
 import living from '../../assets/instagram/DV1UvnwCKdL_5.jpg';
+import lawnMowing from '../../assets/instagram/tinas-cesped.jpg';
 
 export interface InstagramPost {
   shortcode: string;
@@ -41,6 +42,7 @@ export const brandPosts: InstagramPost[] = [
 /** Real work: pools, carpentry, apartments after cleaning. */
 export const workPosts: InstagramPost[] = [
   post('DbK-RQ-O0RG', poolCare, 'TINAS team member caring for a villa pool', 'Miembro del equipo de TINAS cuidando la piscina de una villa'),
+  post('tinas-cesped', lawnMowing, 'TINAS team member mowing a villa lawn', 'Miembro del equipo de TINAS cortando el césped de una villa'),
   post('DX15JHtiEvg', carpentryBySea, 'Sanding outdoor furniture by the sea', 'Lijado de muebles de exterior frente al mar'),
   post('DWUIzLPiGEf', poolClear, 'Crystal clear pool ready for the season', 'Piscina cristalina lista para la temporada'),
   post('DX15JHtiEvg', sanding, 'Perfect finish on the woodwork', 'Acabado perfecto en la madera'),

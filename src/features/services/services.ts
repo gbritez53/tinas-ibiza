@@ -4,6 +4,7 @@ import apartmentBathroom from '../../assets/services/apartment-bathroom.jpg';
 import poolClear from '../../assets/services/pool-clear.jpg';
 import painting from '../../assets/services/painting.jpg';
 import handyman from '../../assets/services/handyman.jpg';
+import garden from '../../assets/services/garden.jpg';
 
 export type ServiceId = 'house-management' | 'cleaning' | 'pool' | 'painting' | 'handyman' | 'garden';
 
@@ -20,5 +21,5 @@ export const services: Service[] = [
   { id: 'pool', image: poolClear },
   { id: 'painting', image: painting },
   { id: 'handyman', image: handyman },
-  { id: 'garden' },
+  { id: 'garden', image: garden },
 ];
