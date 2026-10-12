@@ -14,6 +14,9 @@ export const es: Dictionary = {
     about: 'Nosotros',
     contact: 'Contacto',
     language: 'Idioma',
+    openMenu: 'Abrir menú',
+    closeMenu: 'Cerrar menú',
+    home: 'Inicio de TINAS',
   },
   hero: {
     tagline: 'Mantenimiento integral',

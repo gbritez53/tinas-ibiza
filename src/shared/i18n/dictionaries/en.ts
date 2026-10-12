@@ -13,6 +13,9 @@ export const en = {
     about: 'About',
     contact: 'Contact',
     language: 'Language',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    home: 'TINAS home',
   },
   hero: {
     tagline: 'Integral maintenance',

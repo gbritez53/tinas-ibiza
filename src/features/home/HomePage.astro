@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../header/SiteHeader.astro';
 import Hero from '../hero/Hero.astro';
 import Manifesto from '../manifesto/Manifesto.astro';
 import CareOverview from '../care/CareOverview.astro';
@@ -12,6 +13,7 @@ import SiteFooter from '../footer/SiteFooter.astro';
 ---
 
 <BaseLayout>
+  <SiteHeader />
   <main>
     <Hero />
     <Manifesto />

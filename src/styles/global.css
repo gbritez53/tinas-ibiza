@@ -44,6 +44,11 @@
     }
   }
 
+  /* Freeze the page behind the open mobile menu. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
   body {
     @apply bg-green-900 font-sans text-cream-200 antialiased;
     /* Sideways reveals start offset; clip (unlike hidden) keeps this from becoming a scroll container. */
