@@ -6,6 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  // Production origin (apex redirects to www): used for canonical and Open Graph URLs.
+  site: 'https://www.tinasibiza.com',
+
   integrations: [react()],
 
   i18n: {
