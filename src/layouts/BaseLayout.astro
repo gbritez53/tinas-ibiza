@@ -8,35 +8,73 @@ import '@fontsource/instrument-serif/latin-400-italic.css';
 import '@fontsource/marcellus/latin-400.css';
 import '@fontsource-variable/montserrat/wght.css';
 import '../styles/global.css';
-import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import { site } from '../shared/config/site';
 import { defaultLocale, getTranslations, localeTags, locales, toLocale } from '../shared/i18n';
 
 const locale = toLocale(Astro.currentLocale);
-const { title, description } = getTranslations(locale).meta;
+const t = getTranslations(locale);
+const { title, description } = t.meta;
 
 // Crawlers need absolute URLs; `site` in astro.config.mjs provides the production origin.
 const origin = Astro.site ?? Astro.url;
 const pageUrl = new URL(Astro.url.pathname, origin).href;
 const ogImage = new URL(`/og-${locale}.jpg`, origin).href;
+const businessId = new URL('/#business', origin).href;
 
-const localBusiness = {
+// One graph so Google links the page, the website and the business it describes.
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'HomeAndConstructionBusiness',
-  name: site.name,
-  description,
-  email: site.email,
-  telephone: site.phones[0].label,
-  areaServed: 'Ibiza',
-  availableLanguage: ['es', 'en'],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Ibiza',
-    postalCode: site.postalCode,
-    addressRegion: 'Balearic Islands',
-    addressCountry: 'ES',
-  },
-  sameAs: [site.instagram.url, site.facebook],
+  '@graph': [
+    {
+      '@type': 'HomeAndConstructionBusiness',
+      '@id': businessId,
+      name: site.name,
+      alternateName: site.shortName,
+      description,
+      url: new URL('/', origin).href,
+      logo: new URL('/icon-512.png', origin).href,
+      image: ogImage,
+      email: site.email,
+      telephone: site.phones[0].href.replace('tel:', ''),
+      contactPoint: site.phones.map((phone) => ({
+        '@type': 'ContactPoint',
+        telephone: phone.href.replace('tel:', ''),
+        contactType: 'customer service',
+        availableLanguage: ['Spanish', 'English'],
+      })),
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Ibiza',
+        postalCode: site.postalCode,
+        addressRegion: 'Illes Balears',
+        addressCountry: 'ES',
+      },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Ibiza' },
+      founder: site.founders.map((name) => ({ '@type': 'Person', name })),
+      foundingDate: site.foundingYear,
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: t.services.title,
+        itemListElement: Object.values(t.services.items).map((name) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: name.replace(/\n/g, ' '),
+            areaServed: 'Ibiza',
+          },
+        })),
+      },
+      sameAs: [site.instagram.url, site.facebook],
+    },
+    {
+      '@type': 'WebSite',
+      name: site.name,
+      url: new URL('/', origin).href,
+      inLanguage: localeTags[locale].lang,
+      publisher: { '@id': businessId },
+    },
+  ],
 };
 ---
 
@@ -60,11 +98,11 @@ const localBusiness = {
         <link
           rel="alternate"
           hreflang={localeTags[alternate].lang}
-          href={getRelativeLocaleUrl(alternate)}
+          href={getAbsoluteLocaleUrl(alternate)}
         />
       ))
     }
-    <link rel="alternate" hreflang="x-default" href={getRelativeLocaleUrl(defaultLocale)} />
+    <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl(defaultLocale)} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={localeTags[locale].og} />
     {
@@ -84,7 +122,7 @@ const localBusiness = {
     <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={pageUrl} />
-    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <slot />

@@ -22,15 +22,18 @@ const t = getTranslations(Astro.currentLocale);
   <!-- pt-36 makes room for the fixed header, which no longer takes space in the flow. -->
   <div class="flex flex-1 flex-col items-center justify-center gap-5 px-8 pt-36 pb-24 text-center">
     <Image src={monogramCream} alt="" data-reveal="fade" class="h-[110px] w-auto" />
-    <h1
-      data-reveal
-      class="font-display text-[clamp(72px,10vw,150px)] leading-[0.9] font-normal tracking-[0.14em] [--reveal-delay:150ms]"
-    >
-      TINAS
+    <!-- The tagline lives inside the h1 so the main heading says what TINAS does and where. -->
+    <h1 class="flex flex-col items-center gap-5">
+      <span
+        data-reveal
+        class="font-display text-[clamp(72px,10vw,150px)] leading-[0.9] font-normal tracking-[0.14em] [--reveal-delay:150ms]"
+      >
+        TINAS
+      </span>
+      <span data-reveal class="font-sans text-sm tracking-[0.34em] uppercase [--reveal-delay:300ms]">
+        {t.hero.tagline} · <span class="text-gold-300">Ibiza</span>
+      </span>
     </h1>
-    <p data-reveal class="text-sm tracking-[0.34em] uppercase [--reveal-delay:300ms]">
-      {t.hero.tagline} · <span class="text-gold-300">Ibiza</span>
-    </p>
     <div
       data-reveal="line"
       class="mt-4 h-18 w-px bg-cream-200 [--reveal-delay:450ms]"

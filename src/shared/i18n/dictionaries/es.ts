@@ -3,7 +3,7 @@ import type { Dictionary } from './en';
 // Copy adapted from the client's own Spanish Instagram captions (formal "usted").
 export const es: Dictionary = {
   meta: {
-    title: 'TINAS Integral Maintenance · Mantenimiento integral en Ibiza',
+    title: 'Mantenimiento de villas y gestión de propiedades en Ibiza | TINAS',
     description:
       'Mantenimiento integral y cuidado de villas y apartamentos de lujo en Ibiza: limpieza, piscinas, jardines, pintura, reparaciones y gestión de la propiedad.',
   },

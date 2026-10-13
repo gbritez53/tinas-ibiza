@@ -2,7 +2,7 @@ import type { ServiceId } from '../../../features/services/services';
 
 export const en = {
   meta: {
-    title: 'TINAS Integral Maintenance · Ibiza',
+    title: 'Villa Maintenance & Property Management in Ibiza | TINAS',
     description:
       'Integral maintenance and property care for luxury villas and apartments in Ibiza: cleaning, pools, gardens, painting, repairs and house management.',
   },

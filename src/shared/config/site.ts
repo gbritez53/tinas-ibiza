@@ -3,6 +3,8 @@ export const site = {
   shortName: 'TINAS',
   location: 'Ibiza, Balearic Islands',
   postalCode: '07800',
+  founders: ['Luis', 'Rocío'],
+  foundingYear: '2026',
   phones: [
     { label: '+34 641 985 073', href: 'tel:+34641985073' },
     { label: '+34 641 983 882', href: 'tel:+34641983882' },
