@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import gardenLawnCare from '../../assets/care/garden-lawn-care.jpg';
+import Icon from '../../shared/ui/Icon.astro';
 import { getTranslations } from '../../shared/i18n';
 
 const t = getTranslations(Astro.currentLocale).care;
@@ -9,7 +10,7 @@ const t = getTranslations(Astro.currentLocale).care;
 <section class="mx-auto flex max-w-7xl flex-wrap items-center gap-16 px-8 py-30">
   <div class="flex min-w-0 flex-[1_1_460px] flex-col gap-6">
     <p data-reveal="fade" class="text-xs tracking-[0.3em] text-gold-300 uppercase">
-      <span aria-hidden="true">✳ </span>{t.eyebrow}
+      <Icon name="asterisk" class="mr-2 inline-block size-3 align-[-1px]" />{t.eyebrow}
     </p>
     <h2
       data-reveal
