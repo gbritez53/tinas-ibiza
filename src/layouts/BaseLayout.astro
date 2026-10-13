@@ -8,6 +8,11 @@ import '@fontsource/instrument-serif/latin-400-italic.css';
 import '@fontsource/marcellus/latin-400.css';
 import '@fontsource-variable/montserrat/wght.css';
 import '../styles/global.css';
+// Fonts painted in the first viewport (hero title, lead and nav). Preloading them starts the
+// download alongside the CSS instead of after it, which is what holds back FCP/LCP on mobile.
+import cormorantRegular from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2?url';
+import cormorantLightItalic from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-300-italic.woff2?url';
+import montserrat from '@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url';
 import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import { site } from '../shared/config/site';
 import { defaultLocale, getTranslations, localeTags, locales, toLocale } from '../shared/i18n';
@@ -86,6 +91,11 @@ const structuredData = {
     <!-- Runs before first paint so reveal elements never flash visible-then-hidden. -->
     <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="generator" content={Astro.generator} />
+    {
+      [cormorantRegular, cormorantLightItalic, montserrat].map((font) => (
+        <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
+      ))
+    }
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0e3636" />
